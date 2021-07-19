@@ -62,6 +62,19 @@ local string_sub = string.sub
 -- suitable, though windows may even have other windows assigned as their
 -- parents.
 --
+-- @usage Split the terminal into 2 windows and draw in them.
+--
+--    local width,height = term.getSize() -- Get the width and height of the terminal.
+--    local half = math.floor(width/2+0.5) -- Get the middle boundary of the terminal.
+--    local winOne = window.create(term.current(),1,1,half,height) -- Create the first window, this is the left half of the total terminal.
+--    local winTwo = window.create(term.current(),half+1,1,half-1,height) -- Create the second window, this is the right half of the total terminal.
+--    winTwo.setBackgroundColour(colours.lightGrey) -- This differentiates the windows.
+--    winTwo.clear() -- Apply the background colour
+--    winOne.setCursorPos(1,1) -- Move the cursor pos to 1,1 relative to the window.
+--    winOne.blit("0123456789abcdef","0123456789abcdef","fffffffffffffff0") -- Draw every colour in order.
+--    winTwo.setCursorPos(1,1) -- This just ensures the cursor pos is 1,1 relative to the window.
+--    winTwo.blit("fedcba9876543210","fedcba9876543210","8888888788888888") -- Draw the same thing, but backwards.
+--
 -- @tparam term.Redirect parent The parent terminal redirect to draw to.
 -- @tparam number nX The x coordinate this window is drawn at in the parent terminal
 -- @tparam number nY The y coordinate this window is drawn at in the parent terminal
